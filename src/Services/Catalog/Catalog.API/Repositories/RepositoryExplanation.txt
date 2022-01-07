@@ -1,0 +1,2 @@
+﻿This is used as the Business logic layer 
+1. Will contain an IProductRepository -> Abstraction layer for the data operation
