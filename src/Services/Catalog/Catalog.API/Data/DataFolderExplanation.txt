@@ -1,0 +1,6 @@
+﻿This folder represents the data access layer for the Microservice
+1. It will contain the product context classes
+2. start of with creating the abstraction 
+2.1 IProductContext -> contains a collection of Products of type IMongoCollection
+2.2 ProductContext implements the IProductContext and sets up the coneection with the db -> ProductDb
+2.3 ProductContextSeed is a static Class which is used to seed the data if any does not exist
