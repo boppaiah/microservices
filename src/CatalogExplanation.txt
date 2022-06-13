@@ -1,0 +1,26 @@
+This catalog api is a n-layered architecture based solution 
+This uses mongo db to store and retrieve items from a collection/table called products found in the catalogDb
+	Mongo db commands or how to get started with mongo db for this project 
+		1. Start windows docker
+		2. Open the terminal window from Visual studio by right clicking the project and click open terminal 
+		   this will open a powershell window 
+		3. Run 'docker pull mongo' -> THIS WILL DOWNLOAD THE LATEST CONTAINER FOR MONGO
+		4. Run 'docker run -d -p  27017:27017 --name 'name of your container' (in this case shopping-mongo) mongo' -> this will create a container by the name
+		   shopping-mongo
+		5. Run 'docker ps' -> to check if the container is running. 
+		6. To check logs of the container created -> Run 'docker logs -f shopping-mongo(name of your container)'
+		7. Switch to mongo bash by typing this command -> lets you run MONGO cli commands 
+		   7.1 Run 'docker exec -it shoopping-mongo /bin/bash'
+		   7.2 You are in the command line interface for monog
+		   7.3 Type 'mongo' this will allow you to run mongo cli commands
+		   7.4 Run 'show dbs' -> this will show the databases 
+		   7.5 If there is a database which you have created -> run use database name else Run 'create database' to create your own database.
+		   7.6 Run 'show collections' to display the list of tables in the db.
+		   7.7 Run 'db.{name of the collection}.find({}).pretty()' to display the list of items in the table, in our case 'Products'.
+		   7.8 Run 'db.{name of the collection}.remove({}) to remove items from the collection.
+		   7.7 Run 'db.{name of the collection}.insertMany([{json object}])' to insert items into the collection -> there is a text file in the folder with the commands uses to insert 
+		       items to the collection for this project. Look at the root level of the project
+		8. we use Mongo-db driver nuget package to communicate with mongo in code.
+		9. Repository pattern is used to talk to the database and retrieve or update or delete items from the database this is the business layer.
+		   all the business logic is under the folder Repositories.
+		10. 
