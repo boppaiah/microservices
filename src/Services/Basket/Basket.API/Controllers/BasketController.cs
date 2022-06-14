@@ -22,7 +22,7 @@ namespace Basket.API.Controllers
         public async Task<ActionResult<ShoppingCart>> GetBasket(string userName)
         {
             var basket = await _basketRepository.GetBasket(userName);
-            //if the user is trying to ge the basket for the first time 
+            //if the user is trying to get the basket for the first time 
             //we create a new shopping cart for the user else we return the
             //existing shopping cart back to the user.
             if(basket == null)
@@ -32,5 +32,26 @@ namespace Basket.API.Controllers
             return Ok(basket);
 
         }
+
+        [HttpPost]
+        [ProducesResponseType(typeof(ShoppingCart), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<ShoppingCart>> UpdateBasket([FromBody] ShoppingCart shoppingCart)
+        {
+            var basket = await _basketRepository.UpdateBasket(shoppingCart);
+            return Ok(basket);
+
+        }
+
+        //[HttpDelete("{userName}", Name = "DeleteBasket")]
+        [Route("[action]/{userName}", Name = "DeleteBasket")]
+        [HttpDelete]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public async Task<IActionResult> DeleteBasket(string userName)
+        {
+            await _basketRepository.DeleteBasket(userName);
+            return Ok();
+
+        }
+
     }
 }
