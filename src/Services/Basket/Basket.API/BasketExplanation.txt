@@ -1,0 +1,31 @@
+This basket api is a n-layered architecture based solution 
+This uses redis db to store and retrieve items
+reason to use redis
+ - this will store basket items data
+ - best place/tool for caching
+ - distributed caching => a cache shared by multiple services
+					   => maintained as an external service to the application service
+					   => can imporve the performance of the application
+					   => cached data across multiple services remains consistant => all the data that comes from the different
+					   microservices can be cached here making data consistant across all services.
+
+	redis  commands or how to get started with redis db for this project 
+		1. Start windows docker
+		2. Open the terminal window from Visual studio by right clicking the project and click open terminal 
+		   this will open a powershell window 
+		3. Run 'docker pull redis' -> THIS WILL DOWNLOAD THE LATEST CONTAINER FOR MONGO
+		4. Run 'docker run -d -p  6379:6379 --name 'name of your container' (in this case basket-redis) redis' -> this will create a container by the name
+		   basket-redis
+		5. Run 'docker ps' -> to check if the container is running. 
+		6. To check logs of the container created -> Run 'docker logs -f basket-redis(name of your container)'
+		7. Switch to mongo bash by typing this command -> lets you run MONGO cli commands 
+		   7.1 Run 'docker exec -it basket-redis /bin/bash'
+
+		9. Repository pattern is used to talk to the database and retrieve or update or delete items from the database this is the business layer.
+		   all the business logic is under the folder Repositories.
+		10. 
+
+==================================
+Folders: 
+Entities -> store entity objects to the rdis store.
+		 -> shoppingCart class 
