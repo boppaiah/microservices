@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MassTransit;
 
 namespace Basket.API
 {
@@ -34,6 +35,7 @@ namespace Basket.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Basket.API", Version = "v1" });
             });
+            services.AddAutoMapper(typeof(Startup));
 
             //register redis
             services.AddStackExchangeRedisCache(options =>
@@ -51,6 +53,33 @@ namespace Basket.API
                 );
             //GRPC SERVICE REGISTRATION
             services.AddScoped<DiscountGrpcService>();
+            
+            
+            //rabbit mq - configure the bus in mass transit
+            services.AddMassTransit(config =>
+            {
+                config.UsingRabbitMq((ctx, cfg) =>
+                {
+                    cfg.Host(Configuration["EventBusSettings:HostAddress"]);
+                });
+            });
+
+            //by default will register the host service and this 
+            //below is the configuration of the host
+            services.AddOptions<MassTransitHostOptions>()
+                .Configure(options =>
+                {
+                    // if specified, waits until the bus is started before
+                    // returning from IHostedService.StartAsync
+                    // default is false
+                    options.WaitUntilStarted = true;
+
+                    // if specified, limits the wait time when starting the bus
+                    options.StartTimeout = TimeSpan.FromSeconds(10);
+
+                    // if specified, limits the wait time when stopping the bus
+                    options.StopTimeout = TimeSpan.FromSeconds(30);
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
