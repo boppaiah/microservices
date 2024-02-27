@@ -7,7 +7,7 @@ namespace Discount.API.Extensions
         public static WebApplication ApplyMigration<TContext>(this WebApplication app, int? retry = 0)
         {
             int retryForAvailability = retry.Value;
-            using (var scope = app.Services.CreateScope())
+            using(var scope = app.Services.CreateScope())
             {
                 var config = scope.ServiceProvider.GetRequiredService<IConfiguration>();
                 var logger = scope.ServiceProvider.GetRequiredService<ILogger<TContext>>();
@@ -38,11 +38,11 @@ namespace Discount.API.Extensions
                     logger.LogInformation("Migrated postresql database.");
 
                 }
-                catch (NpgsqlException ex)
+                catch(NpgsqlException ex)
                 {
-                    logger.LogError(ex, "An error occurred while migrating the postresql database");
+                    logger.LogError(ex, "An error occurred while migrating the postgresql database");
 
-                    if (retryForAvailability < 50)
+                    if(retryForAvailability < 50)
                     {
                         retryForAvailability++;
                         System.Threading.Thread.Sleep(2000);

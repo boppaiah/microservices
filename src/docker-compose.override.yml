@@ -20,33 +20,33 @@ services:
     environment:
      - POSTGRES_USER=admin
      - POSTGRES_PASSWORD=admin1234
-     - POSTGRES_DB=DiscountDb
+     - POSTGRES_DB=discountDb
     restart: always
     ports:
-    - "5432:5432"
+    - "6543:5432"
     volumes:
     - postgres_data:/var/lib/postgresql/data/
 
-  pgadmin:
-    container_name: pgadmin
-    environment: 
-    - PGADMIN_DEFAULT_EMAIL=admin@aspnetrun.com
-    - PGADMIN_DEFAULT_PASSWORD=admin1234
-    restart: always
-    ports:
-    - "5050:80"
-    volumes:
-    - pgadmin_data:/root/.pgadmin 
+  #pgadmin:
+  #  container_name: pgadmin
+  #  environment: 
+  #  - PGADMIN_DEFAULT_EMAIL=admin@aspnetrun.com
+  #  - PGADMIN_DEFAULT_PASSWORD=admin1234
+  #  restart: always
+  #  ports:
+  #  - "5050:80"
+  #  volumes:
+  #  - pgadmin_data:/root/.pgadmin 
 
-  portainer:
-    container_name: portainer
-    restart: always
-    ports:
-    - "8020:8000"
-    - "9000:9000"
-    volumes:
-    - /var/run/docker.sock:/var/run/docker.sock
-    - portainer_data:/data
+  #portainer:
+  #  container_name: portainer
+  #  restart: always
+  #  ports:
+  #  - "8020:8000"
+  #  - "9000:9000"
+  #  volumes:
+  #  - /var/run/docker.sock:/var/run/docker.sock
+  #  - portainer_data:/data
 
   catalog.api:
     container_name: catalog.api
@@ -73,7 +73,7 @@ services:
     container_name: discount.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - "DatabaseSettings:ConnectionString=Server=discountdb;Port=5432;Database=DiscountDb;User Id=admin;Password=admin1234;"
+      - "DatabaseSettings:ConnectionString=Server=Discountdb;Port=5432;Database=discountDb;User Id=admin;Password=admin1234;"
     depends_on:
       - discountdb
     ports:
@@ -83,7 +83,7 @@ services:
     container_name: discount.grpc
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - "DatabaseSettings:ConnectionString=Server=discountdb;Port=5432;Database=DiscountDb;User Id=admin;Password=admin1234;"
+      - "DatabaseSettings:ConnectionString=Server=discountdb;Port=5432;Database=discountDb;User Id=admin;Password=admin1234;"
     depends_on:
       - discountdb
     ports:

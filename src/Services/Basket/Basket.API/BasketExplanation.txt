@@ -13,12 +13,12 @@ reason to use redis
 		1. Start windows docker
 		2. Open the terminal window from Visual studio by right clicking the project and click open terminal 
 		   this will open a powershell window 
-		3. Run 'docker pull redis' -> THIS WILL DOWNLOAD THE LATEST CONTAINER FOR MONGO
+		3. Run 'docker pull redis' -> THIS WILL DOWNLOAD THE LATEST IMAGE FOR REDIS FROM DOCKER
 		4. Run 'docker run -d -p  6379:6379 --name 'name of your container' (in this case basket-redis) redis' -> this will create a container by the name
 		   basket-redis
 		5. Run 'docker ps' -> to check if the container is running. 
 		6. To check logs of the container created -> Run 'docker logs -f basket-redis(name of your container)'
-		7. Switch to mongo bash by typing this command -> lets you run MONGO cli commands 
+		7. Switch to redis bash by typing this command -> lets you run redis cli commands 
 		   7.1 Run 'docker exec -it basket-redis /bin/bash'
 
 		9. Repository pattern is used to talk to the database and retrieve or update or delete items from the database this is the business layer.
